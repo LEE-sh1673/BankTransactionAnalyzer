@@ -12,7 +12,10 @@ import java.util.List;
 public class BankTransactionAnalyzerSimple {
     private static final String RESOURCES = "src/main/resources/";
 
+    // TODO: 현재 코드는 특정 데이터 형식 만을 지원함. 새로운 열을 추가하거나 다른 데이터 형식을 지원하도록 구현할 것.
     public static void getTotalTransactions(final String file) throws IOException {
+
+        // TODO: `getMonthTransactions`와 중복된 부분 발생. 추후 리펙토링 필요.
         final Path path = Paths.get(RESOURCES + file);
         final List<String> lines = Files.readAllLines(path);
         double total = 0d;
@@ -25,9 +28,11 @@ public class BankTransactionAnalyzerSimple {
         System.out.println("The total for all transactions is " + total);
     }
 
+    // TODO: 현재 코드는 특정 데이터 형식 만을 지원함. 새로운 열을 추가하거나 다른 데이터 형식을 지원하도록 구현할 것.
     public static void getMonthTransactions(final String file,
                                             final Month month) throws IOException {
 
+        // TODO: `getTotalTransactions`와 중복된 부분 발생. 추후 리펙토링 필요.
         final Path path = Paths.get(RESOURCES + file);
         final List<String> lines = Files.readAllLines(path);
         double total = 0d;
