@@ -1,3 +1,4 @@
 .idea/
 BankTransactionAnalyzer.iml
 target/
+src/main/resources/requirements.md
