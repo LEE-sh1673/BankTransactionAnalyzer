@@ -23,11 +23,11 @@ public class BankStatementCSVParserTest {
                 -50,
                 "Tesco"
         );
-        final double tolerance = 0.0d;
-        
+        final double DELTA = 1e-15;
+
         // Set up assertions of expected results. -> Assert.assertEquals(expected, actual, [delta]);
         Assert.assertEquals(expected.getDate(), result.getDate());
-        Assert.assertEquals(expected.getAmount(), result.getAmount(), tolerance);
+        Assert.assertEquals(expected.getAmount(), result.getAmount(), DELTA);
         Assert.assertEquals(expected.getDescription(), result.getDescription());
     }
 }
