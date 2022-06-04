@@ -8,11 +8,8 @@ import java.time.Month;
 import java.util.List;
 
 /**
- * This is entry-point class of BankTransactionAnalyzer.
- *
- * <p>
- * It connects parser, calculation, display results functions.
- * </p>
+ * It connects parser, calculation, display results modules
+ * and show Bank transaction statements summary.
  *
  * @author LEE-sh1673
  * @since 22-06-04
