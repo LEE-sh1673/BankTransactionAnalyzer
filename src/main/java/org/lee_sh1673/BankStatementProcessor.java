@@ -1,6 +1,7 @@
 package org.lee_sh1673;
 
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BankStatementProcessor {
@@ -41,5 +42,41 @@ public class BankStatementProcessor {
             }
         }
         return totalAmount;
+    }
+
+    public List<BankTransaction> findTransactionGreaterThanEqual(final int amount) {
+        final List<BankTransaction> transactions = new ArrayList<>();
+        for (final BankTransaction transaction : bankTransactions) {
+
+            if (transaction.getAmount() >= amount) {
+                transactions.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public List<BankTransaction> findTransactionsInMonth(final Month month) {
+        final List<BankTransaction> transactions = new ArrayList<>();
+        for (final BankTransaction transaction : bankTransactions) {
+
+            if (transaction.getDate().getMonth() == month) {
+                transactions.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public List<BankTransaction> findTransactionsInMonthAndGreater(final Month month,
+                                                                   final int amount) {
+
+        final List<BankTransaction> transactions = new ArrayList<>();
+        for (final BankTransaction transaction : bankTransactions) {
+
+            if (transaction.getDate().getMonth() == month
+                    && transaction.getAmount() > amount) {
+                transactions.add(transaction);
+            }
+        }
+        return transactions;
     }
 }
