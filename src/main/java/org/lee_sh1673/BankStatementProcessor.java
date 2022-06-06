@@ -11,37 +11,31 @@ public class BankStatementProcessor {
         this.bankTransactions = bankTransactions;
     }
 
-    public double calculateTotalAmount() {
-        double totalAmount = 0d;
+    public double summarize(final BankTransactionSummarizer transactionSummarizer) {
+        double result = 0d;
 
         for (final BankTransaction bankTransaction : bankTransactions) {
-            totalAmount += bankTransaction.getAmount();
+            result = transactionSummarizer.summarize(result, bankTransaction);
         }
-        return totalAmount;
+        return result;
+    }
+
+    public double calculateTotalAmount() {
+        return summarize(((acc, bankTransaction) -> acc + bankTransaction.getAmount()));
     }
 
     public double calculateTotalInMonth(final Month month) {
-        double totalAmount = 0d;
-
-        for (final BankTransaction bankTransaction : bankTransactions) {
-
-            if (bankTransaction.getDate().getMonth() == month) {
-                totalAmount += bankTransaction.getAmount();
-            }
-        }
-        return totalAmount;
+        return summarize(((acc, bankTransaction) ->
+                bankTransaction.getDate().getMonth() == month
+                        ? acc + bankTransaction.getAmount()
+                        : acc));
     }
 
     public double calculateTotalInCategory(final String category) {
-        double totalAmount = 0d;
-
-        for (final BankTransaction bankTransaction : bankTransactions) {
-
-            if (bankTransaction.getDescription().equals(category)) {
-                totalAmount += bankTransaction.getAmount();
-            }
-        }
-        return totalAmount;
+        return summarize(((acc, bankTransaction) ->
+                bankTransaction.getDescription().equals(category)
+                        ? acc + bankTransaction.getAmount()
+                        : acc));
     }
 
     public List<BankTransaction> findTransactions(final BankTransactionFilter transactionFilter) {
@@ -53,5 +47,9 @@ public class BankStatementProcessor {
             }
         }
         return transactions;
+    }
+
+    public List<BankTransaction> findTransactionsGreaterThenEqual(final double amount) {
+        return findTransactions(bankTransaction -> bankTransaction.getAmount() >= amount);
     }
 }
